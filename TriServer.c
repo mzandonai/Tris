@@ -365,32 +365,6 @@ int main(int argc, char *argv[])
     shared_memory[STATUS] = 1; // Gioco iniziato
     printf("In attesa di due giocatori per iniziare la partita...\n");
 
-    /*
-    sop.sem_num = 0;
-    sop.sem_op = -2;
-    sop.sem_flg = 0;
-
-    if (semop(semid, &sop, 1) == -1)
-    {
-        printf("\n");
-        printf("Errore con il semaforo\n");
-        printf("\n");
-        if (kill(shared_memory[PID1], 0) == 0)
-        {
-            kill(shared_memory[PID1], SIGTERM);
-        }
-
-        if (kill(shared_memory[PID2], 0) == 0)
-        {
-            kill(shared_memory[PID2], SIGTERM);
-        }
-
-        check_sem(semid);
-        cleanup();
-        exit(0);
-    }
-    */
-
     while (semctl(semid, 0, GETVAL) < 2)
     {
         semctl(semid, 0, GETVAL);
@@ -403,7 +377,7 @@ int main(int argc, char *argv[])
         /*
             shared_memory[STATUS] = 0 // gioco da iniziare
             shared_memory[STATUS] = 1 // gioco iniziato
-            shared_memory[STATUS6] = 2 // vittoria pareggio
+            shared_memory[STATUS] = 2 // vittoria pareggio
             shared_memory[STATUS] = 3 // pareggio
         */
 

@@ -327,8 +327,8 @@ void correct_move()
 {
     char input[4];
     int dim = shared_memory[MATRIX_DIM]; // Dimensione della matrice
-    int row, col;               // Righe e colonne
-    bool valid_move = false;    // Mossa valida messa a false
+    int row, col;                        // Righe e colonne
+    bool valid_move = false;             // Mossa valida messa a false
 
     while (!valid_move && shared_memory[VALID_MOVE] == 0)
     {
@@ -378,7 +378,7 @@ void correct_move()
                             shared_memory[VALID_MOVE] = 1;
                             alarm(0);
 
-                            if (shared_memory[STATUS] != 2 || shared_memory[STATUS] != 3)
+                            if (shared_memory[VALID_MOVE] != 1 && (shared_memory[STATUS] != 2 || shared_memory[STATUS] != 3))
                             {
                                 printf("\n");
                                 printf("\nTabellone dopo la tua mossa:\n");
@@ -619,7 +619,7 @@ int main(int argc, char *argv[])
             }
 
             correct_move();
-            if (!bot)
+            if (!bot && (shared_memory[STATUS] != 2 || shared_memory[STATUS] != 3))
             {
                 printf("\nL'avversario sta eseguendo la mossa...\n");
             }
